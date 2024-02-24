@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+option go_package = "github.com/JobNing/message/user";
+
+
+service User {
+    rpc Login(LoginRequest) returns (LoginResponse);
+}
+
+message LoginRequest {
+    string Name = 10;
+}
+
+message LoginResponse {
+    string Message = 10;
+}
