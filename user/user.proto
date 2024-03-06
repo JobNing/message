@@ -2,10 +2,17 @@ syntax = "proto3"; //proto版本选择
 
 package user; //proto包名
 
+import "google/api/annotations.proto";
+
 option go_package = "github.com/JobNing/message/user"; // Golang的报名
 
 service User {
-    rpc GetUser   (GetUserRequest)    returns (GetUserResponse);
+    rpc GetUser   (GetUserRequest)    returns (GetUserResponse){
+        option (google.api.http) = {
+            post: "/get/user"
+            body: "*"
+        };
+    };
     rpc GetUsers  (GetUsersRequest)   returns (GetUsersResponse);
     rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
     rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse);
