@@ -1,0 +1,69 @@
+syntax = "proto3"; //proto版本选择
+
+package user; //proto包名
+
+option go_package = "github.com/JobNing/message/user"; // Golang的报名
+
+service Good {
+    rpc GetGood   (GetGoodRequest)    returns (GetGoodResponse);
+    rpc GetGoods  (GetGoodsRequest)   returns (GetGoodsResponse);
+    rpc CreateGood(CreateGoodRequest) returns (CreateGoodResponse);
+    rpc UpdateGood(UpdateGoodRequest) returns (UpdateGoodResponse);
+    rpc DeleteGood(DeleteGoodRequest) returns (DeleteGoodResponse);
+}
+
+message GoodInfo {
+    int64  ID       = 10;
+    string GoodName = 20;
+    string Amount   = 30;
+    string Stock    = 40;
+    int64  Image    = 50;
+}
+
+message GetGoodRequest {
+    int64 ID = 10;
+}
+
+message GetGoodResponse {
+    GoodInfo Info = 10;
+}
+
+message GetGoodsRequest {
+    int64 Offset = 10;
+    int64 Limit  = 20;
+}
+
+message GetGoodsResponse {
+    repeated GoodInfo Infos = 10;
+    int64             Total = 20;
+}
+
+message CreateGoodRequest {
+    GoodInfo Info = 10;
+}
+
+message CreateGoodResponse {
+    GoodInfo Info = 10;
+}
+
+message UpdateGoodRequest {
+    GoodInfo Info = 10;
+}
+
+message UpdateGoodResponse {
+    GoodInfo Info = 10;
+}
+
+message DeleteGoodRequest {
+    int64 ID = 10;
+}
+
+message DeleteGoodResponse {}
+
+message GetGoodByGoodnameRequest {
+    string Goodname = 10;
+}
+
+message GetGoodByGoodnameResponse {
+    GoodInfo Info = 10;
+}
