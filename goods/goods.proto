@@ -17,7 +17,7 @@ message GoodInfo {
     string GoodName = 20;
     string Amount   = 30;
     int64  Stock    = 40;
-    int64  Image    = 50;
+    string Image    = 50;
 }
 
 message GetGoodRequest {
