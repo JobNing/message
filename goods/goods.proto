@@ -16,7 +16,7 @@ message GoodInfo {
     int64  ID       = 10;
     string GoodName = 20;
     string Amount   = 30;
-    string Stock    = 40;
+    int64  Stock    = 40;
     int64  Image    = 50;
 }
 
