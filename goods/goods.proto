@@ -1,8 +1,8 @@
 syntax = "proto3"; //proto版本选择
 
-package user; //proto包名
+package goods; //proto包名
 
-option go_package = "github.com/JobNing/message/user"; // Golang的报名
+option go_package = "github.com/JobNing/message/goods"; // Golang的报名
 
 service Good {
     rpc GetGood   (GetGoodRequest)    returns (GetGoodResponse);

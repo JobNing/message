@@ -4,7 +4,7 @@
 // - protoc             v3.13.0
 // source: goods/goods.proto
 
-package user
+package goods
 
 import (
 	context "context"
@@ -19,11 +19,11 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Good_GetGood_FullMethodName    = "/user.Good/GetGood"
-	Good_GetGoods_FullMethodName   = "/user.Good/GetGoods"
-	Good_CreateGood_FullMethodName = "/user.Good/CreateGood"
-	Good_UpdateGood_FullMethodName = "/user.Good/UpdateGood"
-	Good_DeleteGood_FullMethodName = "/user.Good/DeleteGood"
+	Good_GetGood_FullMethodName    = "/goods.Good/GetGood"
+	Good_GetGoods_FullMethodName   = "/goods.Good/GetGoods"
+	Good_CreateGood_FullMethodName = "/goods.Good/CreateGood"
+	Good_UpdateGood_FullMethodName = "/goods.Good/UpdateGood"
+	Good_DeleteGood_FullMethodName = "/goods.Good/DeleteGood"
 )
 
 // GoodClient is the client API for Good service.
@@ -228,7 +228,7 @@ func _Good_DeleteGood_Handler(srv interface{}, ctx context.Context, dec func(int
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var Good_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "user.Good",
+	ServiceName: "goods.Good",
 	HandlerType: (*GoodServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
