@@ -4,6 +4,8 @@
 // - protoc             v3.13.0
 // source: goods/goods.proto
 
+//proto版本选择
+
 package goods
 
 import (
@@ -19,11 +21,12 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Good_GetGood_FullMethodName    = "/goods.Good/GetGood"
-	Good_GetGoods_FullMethodName   = "/goods.Good/GetGoods"
-	Good_CreateGood_FullMethodName = "/goods.Good/CreateGood"
-	Good_UpdateGood_FullMethodName = "/goods.Good/UpdateGood"
-	Good_DeleteGood_FullMethodName = "/goods.Good/DeleteGood"
+	Good_GetGood_FullMethodName     = "/goods.Good/GetGood"
+	Good_GetGoods_FullMethodName    = "/goods.Good/GetGoods"
+	Good_CreateGood_FullMethodName  = "/goods.Good/CreateGood"
+	Good_UpdateGood_FullMethodName  = "/goods.Good/UpdateGood"
+	Good_DeleteGood_FullMethodName  = "/goods.Good/DeleteGood"
+	Good_UpdateStock_FullMethodName = "/goods.Good/UpdateStock"
 )
 
 // GoodClient is the client API for Good service.
@@ -35,6 +38,7 @@ type GoodClient interface {
 	CreateGood(ctx context.Context, in *CreateGoodRequest, opts ...grpc.CallOption) (*CreateGoodResponse, error)
 	UpdateGood(ctx context.Context, in *UpdateGoodRequest, opts ...grpc.CallOption) (*UpdateGoodResponse, error)
 	DeleteGood(ctx context.Context, in *DeleteGoodRequest, opts ...grpc.CallOption) (*DeleteGoodResponse, error)
+	UpdateStock(ctx context.Context, in *UpdateStockRequest, opts ...grpc.CallOption) (*UpdateStockResponse, error)
 }
 
 type goodClient struct {
@@ -90,6 +94,15 @@ func (c *goodClient) DeleteGood(ctx context.Context, in *DeleteGoodRequest, opts
 	return out, nil
 }
 
+func (c *goodClient) UpdateStock(ctx context.Context, in *UpdateStockRequest, opts ...grpc.CallOption) (*UpdateStockResponse, error) {
+	out := new(UpdateStockResponse)
+	err := c.cc.Invoke(ctx, Good_UpdateStock_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // GoodServer is the server API for Good service.
 // All implementations must embed UnimplementedGoodServer
 // for forward compatibility
@@ -99,6 +112,7 @@ type GoodServer interface {
 	CreateGood(context.Context, *CreateGoodRequest) (*CreateGoodResponse, error)
 	UpdateGood(context.Context, *UpdateGoodRequest) (*UpdateGoodResponse, error)
 	DeleteGood(context.Context, *DeleteGoodRequest) (*DeleteGoodResponse, error)
+	UpdateStock(context.Context, *UpdateStockRequest) (*UpdateStockResponse, error)
 	mustEmbedUnimplementedGoodServer()
 }
 
@@ -120,6 +134,9 @@ func (UnimplementedGoodServer) UpdateGood(context.Context, *UpdateGoodRequest) (
 }
 func (UnimplementedGoodServer) DeleteGood(context.Context, *DeleteGoodRequest) (*DeleteGoodResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteGood not implemented")
+}
+func (UnimplementedGoodServer) UpdateStock(context.Context, *UpdateStockRequest) (*UpdateStockResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateStock not implemented")
 }
 func (UnimplementedGoodServer) mustEmbedUnimplementedGoodServer() {}
 
@@ -224,6 +241,24 @@ func _Good_DeleteGood_Handler(srv interface{}, ctx context.Context, dec func(int
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Good_UpdateStock_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateStockRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GoodServer).UpdateStock(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Good_UpdateStock_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GoodServer).UpdateStock(ctx, req.(*UpdateStockRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Good_ServiceDesc is the grpc.ServiceDesc for Good service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -250,6 +285,10 @@ var Good_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteGood",
 			Handler:    _Good_DeleteGood_Handler,
+		},
+		{
+			MethodName: "UpdateStock",
+			Handler:    _Good_UpdateStock_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -1,23 +1,30 @@
-syntax = "proto3"; //proto版本选择
+syntax = "proto3";
 
-package goods; //proto包名
+//proto版本选择
 
-option go_package = "github.com/JobNing/message/goods"; // Golang的报名
+package goods;
+
+//proto包名
+
+option go_package = "github.com/JobNing/message/goods";
+
+// Golang的报名
 
 service Good {
-    rpc GetGood   (GetGoodRequest)    returns (GetGoodResponse);
-    rpc GetGoods  (GetGoodsRequest)   returns (GetGoodsResponse);
-    rpc CreateGood(CreateGoodRequest) returns (CreateGoodResponse);
-    rpc UpdateGood(UpdateGoodRequest) returns (UpdateGoodResponse);
-    rpc DeleteGood(DeleteGoodRequest) returns (DeleteGoodResponse);
+    rpc GetGood (GetGoodRequest) returns (GetGoodResponse);
+    rpc GetGoods (GetGoodsRequest) returns (GetGoodsResponse);
+    rpc CreateGood (CreateGoodRequest) returns (CreateGoodResponse);
+    rpc UpdateGood (UpdateGoodRequest) returns (UpdateGoodResponse);
+    rpc DeleteGood (DeleteGoodRequest) returns (DeleteGoodResponse);
+    rpc UpdateStock (UpdateStockRequest) returns (UpdateStockResponse);
 }
 
 message GoodInfo {
-    int64  ID       = 10;
+    int64 ID = 10;
     string GoodName = 20;
-    string Amount   = 30;
-    int64  Stock    = 40;
-    string Image    = 50;
+    string Amount = 30;
+    int64 Stock = 40;
+    string Image = 50;
 }
 
 message GetGoodRequest {
@@ -30,12 +37,12 @@ message GetGoodResponse {
 
 message GetGoodsRequest {
     int64 Offset = 10;
-    int64 Limit  = 20;
+    int64 Limit = 20;
 }
 
 message GetGoodsResponse {
     repeated GoodInfo Infos = 10;
-    int64             Total = 20;
+    int64 Total = 20;
 }
 
 message CreateGoodRequest {
@@ -65,5 +72,13 @@ message GetGoodByGoodnameRequest {
 }
 
 message GetGoodByGoodnameResponse {
+    GoodInfo Info = 10;
+}
+
+message UpdateStockRequest {
+    int64 ID = 10;
+}
+
+message UpdateStockResponse {
     GoodInfo Info = 10;
 }
