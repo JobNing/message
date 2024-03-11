@@ -76,7 +76,8 @@ message GetGoodByGoodnameResponse {
 }
 
 message UpdateStockRequest {
-    int64 ID = 10;
+    int64 ID  = 10;
+    int64 Num = 20;
 }
 
 message UpdateStockResponse {
